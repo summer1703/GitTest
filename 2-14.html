@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-1.8.3.min.js"></script>
+    <style>
+        body{
+            width: 500px;
+            margin: 0 auto;
+        }
+        .cudgel{
+            background-color: gold;
+            border-radius: 10px;
+            height: 400px;
+            width: 60px;
+            margin: 100px auto;
+            text-align: center;
+            position: relative;
+        }
+        .text{
+            font-size: 20px;
+            font-family: "隶书","楷体";
+            display: block;
+            width: 20px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -10px;
+        }
+        .setting-Btn{
+            width: 60px;
+            height: 30px;
+            position: absolute;
+            top: -30px;
+            left: -70px;
+        }
+        .setting-box{
+            width: 360px;
+            height: 360px;
+            background-color: white;
+            border: 1px solid #999999;
+            position: absolute;
+            left: -410px;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 999;
+            display: none;
+        }
+        .setting-box>div{
+            margin: 60px 20px;
+        }
+        .setting-box button{
+            width: 100px;
+            height: 50px;
+            border-radius: 10px;
+            font-size: 20px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+        .red{
+            background-color: red;
+        }
+        .blue{
+            background-color: skyblue;
+        }
+        .green{
+            background-color: lightgreen;
+        }
+        .setting-box input{
+            width: 100px;
+        }
+        .setting-box label{
+            margin-left: 6px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+
+            var settingBtn = $("#settingBtn");
+            var settingBox = $(".setting-box");
+            var width = $("#width");
+            var height = $("#height");
+            var cudgel = $("#cudgel");
+
+            settingBtn.on("click",function(){
+                settingBtn.hide();
+                settingBox.show();
+
+            });
+            $(".color-Btn").on("click",function(){
+                cudgel.css("background-color",$(this).css("background-color"))
+            });
+            $("#setBtn").on("click",function(){
+                if(!isNaN(width.val())){
+                    cudgel.css("width",width.val() + "px")
+                }
+                if(!isNaN(height.val())){
+                    cudgel.css("height",height.val() + "px")
+                }
+                width.val("");
+                height.val("");
+                settingBtn.show();
+                settingBox.hide();
+            });
+            $("#resetBtn").on("click",function(){
+                cudgel.css("background","gold");
+                cudgel.css("width","60px");
+                cudgel.css("height","400px");
+
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="cudgel" class="cudgel">
+    <span class="text">如<br>意<br>金<br>箍<br>棒</span>
+    <button id="settingBtn" class="setting-Btn">设置</button>
+    <div>
+        <div class="setting-box">
+            <div>
+                <button class="color-Btn red">红色</button>
+                <button class="color-Btn blue">蓝色</button>
+                <button class="color-Btn green">绿色</button>
+            </div>
+            <label>宽：</label><input type="text" id="width"><label>px</label>
+            <label>高：</label><input type="text" id="height"><label>px</label>
+            <div>
+                <button id="resetBtn">恢复</button>
+                <button id="setBtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
